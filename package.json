@@ -1,12 +1,12 @@
 {
   "name": "electron-autoupdate-scaffold",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "基本步骤：",
-  "main": "app/main.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "generate-package": "gulp generate-package",
-    "generate-installer": "gulp generate-installer"
+    "gen-package": "gulp gen-package",
+    "gen-installer": "gulp gen-installer"
   },
   "repository": {
     "type": "git",

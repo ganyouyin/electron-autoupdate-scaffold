@@ -53,9 +53,9 @@ let generateInstaller = () => {
         });
 };
 
-gulp.task('generate-package', () => generatePackage());
+gulp.task('gen-package', () => generatePackage());
 
-gulp.task('generate-installer', () => {
+gulp.task('gen-installer', () => {
     let step = 1;
 
     return Promise.resolve()

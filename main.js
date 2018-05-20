@@ -1,7 +1,5 @@
-if (require('electron-squirrel-startup')) return;
-
-require('update-electron-app')();
-
+const path = require('path');
+const url = require('url');
 const {
     app,
     BrowserWindow,
@@ -9,8 +7,6 @@ const {
     dialog,
     ipcMain
 } = require('electron');
-const path = require('path');
-const url = require('url');
 
 let webContents;
 
@@ -33,9 +29,26 @@ let createWindow = () => {
         })
     );
 
-    // webContents.openDevTools();
+    webContents.openDevTools();
 };
 
-app.on('ready', () => createWindow());
+app.on('ready', () => {
+    if (require('electron-squirrel-startup')) {
+        return;
+    }
+
+    createWindow();
+
+    setTimeout(() => {
+        require('update-electron-app')({
+            repo: 'ganyouyin/electron-autoupdate-scaffold',
+            logger: {
+                log(...args) {
+                    webContents.send('message', args);
+                }
+            }
+        });
+    }, 1000);
+});
 
 app.on('window-all-closed', () => app.quit());
