@@ -1,16 +1,18 @@
-let gulp = require('gulp');
-let packager = require('electron-packager');
-let winstaller = require('electron-winstaller');
+const gulp = require('gulp');
+const packager = require('electron-packager');
+const winstaller = require('electron-winstaller');
+const fs = require('fs');
+const json = require('./package.json');
 
-let platform = 'win32';
-let arch = 'ia32';
-let dir = 'app';
-let name = `myapp-win32-${arch}`;
-let out = 'dist/package';
-let appDirectory = `${out}/${name}`;
-let outputDirectory = `dist/installer/${name}`;
-let icon = 'favicon.ico';
-let loadingGif = 'loading.gif';
+const platform = 'win32';
+const arch = 'ia32';
+const dir = '.';
+const name = `${json.name}-win32-${arch}`;
+const out = 'dist/package';
+const appDirectory = `${out}/${name}`;
+const outputDirectory = `dist/installer/${name}`;
+const icon = 'favicon.ico';
+const loadingGif = 'loading.gif';
 
 let isDirExist = (path) => {
     return new Promise((resolve) => {
@@ -29,7 +31,7 @@ let generatePackage = () => {
             // 桌面快捷方式名称以及开始菜单文件夹名称
             'version-string': {
                 CompanyName: 'MyCompany Inc.',
-                ProductName: 'myapp'
+                ProductName: json.name
             }
         }, (err) => err ? reject(err) : resolve());
     });
@@ -42,9 +44,9 @@ let generateInstaller = () => {
             outputDirectory,
             loadingGif,
             authors: 'ganyouyin',
-            exe: 'myapp.exe',
+            exe: `${json.name}.exe`,
             title: 'My APP',
-            iconUrl: `${__dirname}/${iconPath}`,
+            iconUrl: `${__dirname}/${icon}`,
             setupIcon: icon,
             setupExe: 'Setup.exe',
             noMsi: true

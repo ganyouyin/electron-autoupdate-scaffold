@@ -20,8 +20,13 @@
   "homepage": "https://github.com/ganyouyin/electron-autoupdate-scaffold#readme",
   "devDependencies": {
     "electron-packager": "^12.1.0",
-    "electron-prebuilt": "^1.4.13",
+    "electron": "^2.0.1",
     "electron-winstaller": "^2.6.4",
     "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^1.1.2"
   }
 }
