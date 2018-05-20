@@ -1,4 +1,4 @@
-##Electron autoUpdater实现Windows安装包自动更新
+## Electron autoUpdater 实现 Windows 安装包自动更新
 
 基本步骤：
 
@@ -8,21 +8,23 @@ electron-prebuilt -> 开发自己的应用 -> electron-packager -> electron-wins
 
 在打包之前我们还需要对我们的应用做一些准备工作。
 
-**建议文件结构**
+** 建议文件结构 **
 
 个人理解这样做的一个原因是将devDependencies和dependencies分开了，另外就是不需要在打包的时候再去指定哪些依赖不需要一起打到安装包里面去了(通过ignore参数)。
 
 首先，我们已经有了一个基于Electron做的应用，参考其他的教程我在项目里面加了两个package.json，目录结构类似于这样：
 
-    myapp
-		-node_modules
-		-package.json
-		-app
-			-js
-			-css
-			-index.html
-			-main.js
-			-package.json
+```
+|- myapp
+  |- node_modules
+  |-package.json
+  |-app
+    |-js
+    |-css
+    |-index.html
+    |-main.js
+    |-package.json
+```
 
 外面的package.json内容类似于：
     
