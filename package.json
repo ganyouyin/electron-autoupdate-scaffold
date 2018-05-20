@@ -1,6 +1,6 @@
 {
   "name": "electron-autoupdate-scaffold",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "基本步骤：",
   "main": "app/main.js",
   "scripts": {
