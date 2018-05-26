@@ -6,7 +6,7 @@ const {
     ipcMain
 } = require('electron');
 const { autoUpdater } = require('electron-updater');
-const packageJson = require('./package.json');
+const feedUrl = `http://127.0.0.1:8080/${process.platform}`;
 
 let webContents;
 
@@ -37,9 +37,7 @@ let sendUpdateMessage = (message, data) => {
 };
 
 let checkForUpdates = () => {
-    let url = `${packageJson.build.publish[0].url}/${process.platform}`;
-
-    autoUpdater.setFeedURL(url);
+    autoUpdater.setFeedURL(feedUrl);
 
     autoUpdater.on('error', function (message) {
         sendUpdateMessage('error', message)
