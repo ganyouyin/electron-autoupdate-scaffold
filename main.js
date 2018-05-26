@@ -3,11 +3,10 @@ const url = require('url');
 const {
     app,
     BrowserWindow,
-    dialog,
     ipcMain
 } = require('electron');
-
 const { autoUpdater } = require('electron-updater');
+const packageJson = require('./package.json');
 
 let webContents;
 
@@ -24,7 +23,7 @@ let createWindow = () => {
 
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'index.html'),
+            pathname: path.join(__dirname, 'src/index.html'),
             protocol: 'file:',
             slashes: true
         })
@@ -38,10 +37,7 @@ let sendUpdateMessage = (message, data) => {
 };
 
 let checkForUpdates = () => {
-
-    let url = `http://127.0.0.1:8080/${process.platform}`;
-
-    sendUpdateMessage(`start checkForUpdates from ${url}`);
+    let url = `${packageJson.build.publish[0].url}/${process.platform}`;
 
     autoUpdater.setFeedURL(url);
 
@@ -72,18 +68,12 @@ let checkForUpdates = () => {
 
     //执行自动更新检查
     autoUpdater.checkForUpdates();
-
-    sendUpdateMessage('after checkForUpdates');
 };
 
 app.on('ready', () => {
     createWindow();
 
-    setTimeout(() => {
-        sendUpdateMessage('after one sec');
-
-        checkForUpdates();
-    }, 1000);
+    setTimeout(checkForUpdates, 1000);
 });
 
 app.on('window-all-closed', () => app.quit());

@@ -1,7 +1,7 @@
 {
   "name": "electron-autoupdate-scaffold",
   "version": "0.0.1",
-  "description": "electron-autoupdate-scaffold",
+  "description": "Windows 下支持自动更新的 Electron 应用脚手架",
   "main": "main.js",
   "build": {
     "appId": "com.xxx.app",
