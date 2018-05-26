@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        ipcRenderer.on('message', (event, { message, data }) => {
+            console.log(message, data);
+            switch (message) {
+                case 'isUpdateNow':
+                    if (confirm('现在更新？')) {
+                        ipcRenderer.send('updateNow');
+                    }
+                    break;
+                default:
+                    document.querySelector('h1').innerHTML = message;
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>

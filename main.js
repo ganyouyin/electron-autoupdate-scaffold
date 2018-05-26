@@ -3,10 +3,11 @@ const url = require('url');
 const {
     app,
     BrowserWindow,
-    autoUpdater,
     dialog,
     ipcMain
 } = require('electron');
+
+const { autoUpdater } = require('electron-updater');
 
 let webContents;
 
@@ -23,7 +24,7 @@ let createWindow = () => {
 
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'src/index.html'),
+            pathname: path.join(__dirname, 'index.html'),
             protocol: 'file:',
             slashes: true
         })
@@ -32,22 +33,56 @@ let createWindow = () => {
     webContents.openDevTools();
 };
 
-app.on('ready', () => {
-    if (require('electron-squirrel-startup')) {
-        return;
-    }
+let sendUpdateMessage = (message, data) => {
+    webContents.send('message', { message, data });
+};
 
+let checkForUpdates = () => {
+
+    let url = `http://127.0.0.1:8080/${process.platform}`;
+
+    sendUpdateMessage(`start checkForUpdates from ${url}`);
+
+    autoUpdater.setFeedURL(url);
+
+    autoUpdater.on('error', function (message) {
+        sendUpdateMessage('error', message)
+    });
+    autoUpdater.on('checking-for-update', function (message) {
+        sendUpdateMessage('checking-for-update', message)
+    });
+    autoUpdater.on('update-available', function (message) {
+        sendUpdateMessage('update-available', message)
+    });
+    autoUpdater.on('update-not-available', function (message) {
+        sendUpdateMessage('update-not-available', message)
+    });
+
+    // 更新下载进度事件
+    autoUpdater.on('download-progress', function (progressObj) {
+        sendUpdateMessage('downloadProgress', progressObj)
+    })
+    autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
+        ipcMain.on('updateNow', (e, arg) => {
+            //some code here to handle event
+            autoUpdater.quitAndInstall();
+        })
+        sendUpdateMessage('isUpdateNow');
+    });
+
+    //执行自动更新检查
+    autoUpdater.checkForUpdates();
+
+    sendUpdateMessage('after checkForUpdates');
+};
+
+app.on('ready', () => {
     createWindow();
 
     setTimeout(() => {
-        require('update-electron-app')({
-            repo: 'ganyouyin/electron-autoupdate-scaffold',
-            logger: {
-                log(...args) {
-                    webContents.send('message', args);
-                }
-            }
-        });
+        sendUpdateMessage('after one sec');
+
+        checkForUpdates();
     }, 1000);
 });
 

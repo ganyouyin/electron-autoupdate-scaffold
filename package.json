@@ -1,12 +1,20 @@
 {
   "name": "electron-autoupdate-scaffold",
   "version": "0.0.1",
-  "description": "基本步骤：",
+  "description": "electron-autoupdate-scaffold",
   "main": "main.js",
+  "build": {
+    "appId": "com.xxx.app",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      }
+    ]
+  },
   "scripts": {
     "start": "electron .",
-    "gen-package": "gulp gen-package",
-    "gen-installer": "gulp gen-installer"
+    "build": "electron-builder -w"
   },
   "repository": {
     "type": "git",
@@ -19,14 +27,10 @@
   },
   "homepage": "https://github.com/ganyouyin/electron-autoupdate-scaffold#readme",
   "devDependencies": {
-    "electron-packager": "^12.1.0",
     "electron": "^2.0.1",
-    "electron-winstaller": "^2.6.4",
-    "gulp": "^3.9.1"
+    "electron-builder": "^20.15.0"
   },
   "dependencies": {
-    "electron-is-dev": "^0.3.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "update-electron-app": "^1.1.2"
+    "electron-updater": "^2.21.10"
   }
 }
