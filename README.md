@@ -59,7 +59,7 @@
 
 	```bash
 	# 工作目录下，比如 d/workspace
-	git clone    https://github.com/ganyouyin/electron-autoupdate-server.git
+	git clone https://github.com/ganyouyin/electron-autoupdate-server.git
 	npm i
 	npm start
 	```
