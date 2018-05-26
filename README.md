@@ -42,7 +42,7 @@
 	• building block map blockMapFile=dist\electron-autoupdate-scaffold Setup 0.0.1.exe.blockmap
 	```
 
-	第一次运行会比较慢，运行结束后会在当前目录下新增一个 dist 文件夹，dist 的目录结构如下：
+	第一次运行会比较慢，运行结束后会在当前目录下新增一个 dist 文件夹，dist 的目录结构如下：
 
 	```
 	|- dist
@@ -64,7 +64,7 @@
 	npm start
 	```
 
-	将之前打包出来的 dist 目录下的 4 个文件（除了 win-unpacked）拷贝到这边的 packages/win32 下。
+	将之前打包出来的 dist 目录下的 4 个文件（除了 win-unpacked）拷贝到这边的 packages/win32 下（需要手动新建目录 packages/win32）。
 
 5. 测试自动更新
 	- 进入 electron-autoupdate-scaffold/dist/win-unpacked 找到可执行文件，双击运行，看到打开窗口的控制台中依次输出：
@@ -74,7 +74,7 @@
 		update-not-available
 		```
 
-	- 进入 electron-autoupdate-scaffold，打开 package.json，把版本号改小，重新打包后再次进入 dist/win-unpacked 目录，运行 exe，看到打开窗口的控制台中依次输出：
+	- 进入 electron-autoupdate-scaffold，打开 package.json，把版本号改小，重新打包后再次进入 dist/win-unpacked 目录，运行 exe，看到打开窗口的控制台中依次输出：
 
 		```
 		checking-for-update
