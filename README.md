@@ -4,29 +4,29 @@
 
 1. 下载应用
 
-	```
+	```bash
 	# 工作目录下，比如 d/workspace
-	git clone    https://github.com/ganyouyin/electron-autoupdate-scaffold.git
+	git clone https://github.com/ganyouyin/electron-autoupdate-scaffold.git
 	npm i
 	```
 
 2. 运行应用
 
-	```
+	```bash
 	cd electron-autoupdate-scaffold
 	npm start
 	```
 
 3. 打包应用
 
-	```
+	```bash
 	# 在 electron-autoupdate-scaffold 目录下
 	npm run build
 	```
 
 	执行后会在控制台输入打包进度的日志：
 	
-	```
+	```bash
 	npm run build
 
 	> electron-autoupdate-scaffold@0.0.1 build D:\honey\electron-autoupdate-scaffold
@@ -44,7 +44,7 @@
 
 	第一次运行会比较慢，运行结束后会在当前目录下新增一个 dist 文件夹，dist 的目录结构如下：
 
-	```
+	```bash
 	|- dist
 	  |- win-unpacked
 	  |- electron-autoupdate-scaffold Setup.exe
@@ -57,7 +57,7 @@
 
 4. 运行自动更新后台
 
-	```
+	```bash
 	# 工作目录下，比如 d/workspace
 	git clone    https://github.com/ganyouyin/electron-autoupdate-server.git
 	npm i
@@ -88,7 +88,7 @@
 
 从 github 下载后文件夹目录如下：
 
-```
+```bash
 |- electron-autoupdate-scaffold
   |- main.js
   |- src
